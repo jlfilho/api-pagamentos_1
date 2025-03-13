@@ -1,5 +1,7 @@
 package edu.uea.dsw.api_pagamentos.service.exception;
 
+import java.time.Instant;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,7 +15,7 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse(
             HttpStatus.NOT_FOUND.value(),
             ex.getMessage(),
-            System.currentTimeMillis()
+            Instant.now()
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
@@ -23,8 +25,17 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse(
             HttpStatus.CONFLICT.value(),
             ex.getMessage(),
-            System.currentTimeMillis()
+            Instant.now()
         );
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponse> handleIllegalArgumentException(IllegalArgumentException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.CONFLICT.value(),
+                ex.getMessage(),
+                Instant.now());
         return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
 }
