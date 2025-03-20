@@ -107,12 +107,10 @@ public class LancamentoService {
             pessoa.setNome(lancamentoDTO.getPessoa().getNome());
             lancamentoExistente.setPessoa(pessoa);
         }
-
         Lancamento LancamentoAtualizado = lancamentoRepository.save(lancamentoExistente);
         return toDTO(LancamentoAtualizado);
     }
-
-    @Transactional
+    
     public void deletarLancamento(Long codigo) {
         if (!lancamentoRepository.existsById(codigo)) {
             throw new RecursoNaoEncontradoException("Lançamento não encontrado");
