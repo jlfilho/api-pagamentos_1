@@ -20,6 +20,7 @@ import edu.uea.dsw.api_pagamentos.dto.LancamentoDTO;
 import edu.uea.dsw.api_pagamentos.dto.LancamentoFilterDTO;
 import edu.uea.dsw.api_pagamentos.dto.ResumoLancamentoDTO;
 import edu.uea.dsw.api_pagamentos.service.LancamentoService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/lancamentos")
@@ -54,7 +55,7 @@ public class LancamentoController {
 
     // POST /lancamentos
     @PostMapping
-    public ResponseEntity<LancamentoDTO> criarLancamento(@RequestBody LancamentoDTO lancamentoDTO) {
+    public ResponseEntity<LancamentoDTO> criarLancamento(@Valid @RequestBody LancamentoDTO lancamentoDTO) {
         LancamentoDTO lancamentoCriado = lancamentoService.criarLancamento(lancamentoDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{codigo}")
@@ -65,7 +66,7 @@ public class LancamentoController {
 
     // PUT /lancamentos/{codigo}
     @PutMapping("/{codigo}")
-    public ResponseEntity<LancamentoDTO> atualizarLancamento(@PathVariable Long codigo,
+    public ResponseEntity<LancamentoDTO> atualizarLancamento(@Valid @PathVariable Long codigo,
             @RequestBody LancamentoDTO lancamentoDTO) {
         LancamentoDTO lancamentoAtualizado = lancamentoService.atualizarLancamento(codigo, lancamentoDTO);
         return ResponseEntity.ok(lancamentoAtualizado);
