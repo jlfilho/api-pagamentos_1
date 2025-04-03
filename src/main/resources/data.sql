@@ -36,4 +36,4 @@ INSERT INTO usuarios (username, password) VALUES ('admin@uea.edu.br', '$2a$10$Eb
 INSERT INTO usuarios (username, password) VALUES ('usuario@uea.edu.br', '$2a$10$Ebmi/uPZlhTEB7e39gsPTOfADOsL0IdEcEQllZyogM/WI/WKUMYdW');
 
 INSERT INTO usuario_roles (usuario_id, role) VALUES (1, 'ROLE_ADMIN');
-INSERT INTO usuario_roles (usuario_id, role) VALUES (2, 'ROLE_USER');*/
+INSERT INTO usuario_roles (usuario_id, role) VALUES (2, 'ROLE_USER');
